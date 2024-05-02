@@ -6,34 +6,23 @@
 
 # You must write an algorithm that runs in O(n) time and without using the division operation.
 
-
-
 def productExceptSelf(nums):
-    """
-    :type nums: List[int]
-    :rtype: List[int]
-    """
+    output = [1]*len(nums)
 
-    prefix = [1]*len(nums)
-    postfix = [1]*len(nums)
-
+    prefix = 1
     for i in range(len(nums)):
-        if i == 0:
-            prefix[i] = 1
-        else:
-            prefix[i] = prefix[i-1] * nums[i-1]
+        if i != 0:
+            prefix = prefix * nums[i-1]
+        output[i] = prefix
 
+    postfix = 1
     for i in range(len(nums), 0, -1):
-        if i == len(nums):
-            postfix[i-1] = 1
-        else: 
-            postfix[i-1] = postfix[i] * nums[i]
+        if i != len(nums):
+            postfix = postfix * nums[i]
+            output[i-1] = output[i-1] * postfix
 
-    for i in range(len(nums)):
-        postfix[i] = postfix[i] * prefix[i]
+    return output
 
-    return postfix
-
-nums = [-1,1,0,-3,3]
+nums = [1, 2, 3, 4]
 
 print(productExceptSelf(nums))
