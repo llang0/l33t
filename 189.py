@@ -18,6 +18,8 @@ def rotate(nums, k):
         nums[i] = newArray[i]
     
 def rotate2(nums, k):
+
+    k = k % len(nums)
     # step 1: reverse array
     l, r = 0, len(nums)-1
     while r > l:
